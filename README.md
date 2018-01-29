@@ -1,6 +1,6 @@
 DevOps Middleware based on Aliyun Container Service / Docker Service
 
-**what ?**
+## Feature
 
 - 镜像仓库管理
 	- 共有仓库
@@ -10,8 +10,20 @@ DevOps Middleware based on Aliyun Container Service / Docker Service
 		- Aliyun Docker Registry
 		- WMware Harbor
 		- Docker Registry
-- 容器服务管理
+- 容器服务管理a
 	- aliyun container service
 	- rancher
 	- docker swarm
 	- kubernetes
+
+## Architecture
+
+![](./assets/comp-relation.png)
+
+## Usage
+
+
+## Reference
+
+- https://github.com/thonatos/opts-react
+- https://github.com/thonatos/opts-egg
