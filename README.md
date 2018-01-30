@@ -2,18 +2,18 @@
 
 ## Feature
 
-**镜像仓库管理**
+**Registry**
 
-- 共有仓库
+- Public Registry
 	- aliyun docker registry
 	- docker hub
-- 私有仓库 
+- Private Registry
 	- Aliyun Docker Registry
 	- WMware Harbor 
 	- Docker Registry
 
 
-**容器服务管理**
+**Deploy to Docker Service**
 
 - aliyun container service
 - rancher (WIP)
@@ -26,6 +26,81 @@
 
 ## Usage
 
+### Install from git
+
+**opts-egg**
+
+```
+# download source
+git clone https://github.com/thonatos/opts-egg.git
+cd opts-egg
+npm i
+
+# config
+touch app/config/config.prop.js
+
+# run
+npm run start
+```
+
+**opts-react**
+
+```
+# download source
+git clone https://github.com/thonatos/opts-react
+cd opts-react
+npm i
+
+# config
+cd src/constants
+vi index.js
+
+```
+
+### Install from docker-compose
+
+<!-- coming soon -->
+
+### Custom Config
+
+**opts-egg**
+
+```js
+// {app_root}/app/config/config.prod.js
+
+// replace with yours
+exports.mongoose = {
+  url: 'mongodb://localhost/devops',
+  options: {},
+};
+
+exports.jwt = {
+  secret: 'opts',
+  enable: true,
+  match: '/api',
+};
+
+// replace with yours
+exports.administrator = {
+  username: 'suyi',
+  password: '123456',
+  userrole: 'admin',
+};
+
+exports.notifications = {
+  dingtalk: {
+    type: 'dingtalk',
+    callbackUrl: '',
+  },
+};
+```
+
+**opts-react**
+
+```js
+// replace with yours
+exports.api_server = 'http://localhost:7001'
+```
 
 ## Screenshot
 
