@@ -1,8 +1,12 @@
-> DevOps Middleware based on Aliyun Container Service / Docker Service
+# Maidops  &middot;  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/thonatos/maidops/blob/master/LICENSE)
 
-## Feature
+Maidops is a  DevOps middleware based on Aliyun Container Service / Docker Service .
 
-**Registry**
+![](./assets/comp-relation.png)
+
+## Features
+
+### Manage Docker Images
 
 - Public Registry
 	- aliyun docker registry
@@ -12,19 +16,14 @@
 	- WMware Harbor 
 	- Docker Registry
 
-
-**Deploy to Docker Service**
+### Deploy to Docker Service
 
 - aliyun container service
 - rancher (WIP)
 - docker swarm (WIP)
 - kubernetes (WIP)
 
-## Architecture
-
-![](./assets/comp-relation.png)
-
-## Usage
+## Installation
 
 ### Install from git
 
@@ -59,7 +58,41 @@ vi index.js
 
 ### Install from docker-compose
 
-<!-- coming soon -->
+**Docker Compose**
+
+```
+version: '2'
+services:
+  devops:
+    image: implementsio/opts-egg:latest
+    environment:
+      - EGG_SERVER_ENV=prod  
+    ports:
+      - 7001
+    volumes:
+      - oss_volume:/nouse
+      - ./opts-egg/config/config.prod.js:/usr/src/app/config/config.prod.js:ro
+```
+
+**Aliyun Container Service**
+
+```
+version: '2'
+services:
+  devops:
+    image: implementsio/opts-egg:latest
+    environment:
+      - EGG_SERVER_ENV=prod  
+    ports:
+      - 7001
+    volumes:
+      - oss_volume:/nouse
+      - /mnt/acs_mnt/ossfs/{YOUR_OSS_VOLUME_NAME}/opts-egg/config/config.prod.js:/usr/src/app/config/config.prod.js:ro
+    labels:
+      aliyun.scale: '1'
+      aliyun.rolling_updates: 'true'
+      aliyun.routing.port_7001: http://{YOUR_DOMAIN_NAME}
+```
 
 ### Custom Config
 
@@ -102,15 +135,19 @@ exports.notifications = {
 exports.api_server = 'http://localhost:7001'
 ```
 
-## Screenshot
-
-![](./assets/screenshot-images.png)
-![](./assets/screenshot-clusters.png)
-![](./assets/screenshot-services.png)
-![](./assets/screenshot-deploys-list.png)
-![](./assets/screenshot-deploys-detail.png)
-
-## Reference
+## Development
 
 - https://github.com/thonatos/opts-react
 - https://github.com/thonatos/opts-egg
+
+***You can find the screenshots [here](./opts-react.md).***
+
+## Contributing
+
+###Suggestions
+
+Please open an issue [here](https://github.com/thonatos/maidops/issues).
+
+### License
+
+Maidops is [MIT licensed](./LICENSE).
