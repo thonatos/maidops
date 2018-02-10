@@ -1,5 +1,7 @@
 # Maidops  &middot;  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/thonatos/maidops/blob/master/LICENSE)
 
+[![CircleCI](https://circleci.com/gh/thonatos/opts-egg.svg?style=svg)](https://circleci.com/gh/thonatos/opts-egg)
+
 Maidops is a  DevOps middleware based on Aliyun Container Service / Docker Service .
 
 ![](./assets/comp-relation.png)
