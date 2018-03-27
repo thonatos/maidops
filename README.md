@@ -2,28 +2,21 @@
 
 [![CircleCI](https://circleci.com/gh/thonatos/opts-egg.svg?style=svg)](https://circleci.com/gh/thonatos/opts-egg)
 
-Maidops is a  DevOps middleware based on Aliyun Container Service / Docker Service .
+Maidops is a  DevOps Middleware based on Docker / Kuberntes .
 
 ![](./assets/comp-relation.png)
 
 ## Features
 
-### Manage Docker Images
-
-- Public Registry
-	- aliyun docker registry
-	- docker hub
-- Private Registry
-	- Aliyun Docker Registry
-	- WMware Harbor 
-	- Docker Registry
-
-### Deploy to Docker Service
-
-- aliyun container service
-- rancher (WIP)
-- docker swarm (WIP)
-- kubernetes (WIP)
+- manage image
+- receive webhook
+	- Docker Hub
+	- Harbor
+	- Aliyun Container Registry
+- deploy to docker / kubernets
+	- aliyun container service
+	- kubernetes
+	- rancher (WIP)
 
 ## Installation
 
@@ -37,7 +30,7 @@ git clone https://github.com/thonatos/opts-egg.git
 cd opts-egg
 npm i
 
-# config
+# config or export envs
 touch app/config/config.prop.js
 
 # run
@@ -53,8 +46,7 @@ cd opts-react
 npm i
 
 # config
-cd src/constants
-vi index.js
+vi env.{env}
 
 ```
 
@@ -68,12 +60,16 @@ services:
   devops:
     image: implementsio/opts-egg:latest
     environment:
-      - EGG_SERVER_ENV=prod  
+      - EGG_SERVER_ENV=prod
+      - EGG_MAIDOPS_ACCESS_TOKEN=
+      - EGG_WHITELIST=
+      - EGG_MAIDOPS_ACCESS_TOKEN=
+      - EGG_ADMINISTRATOR_USERNAEM=
+      - EGG_ADMINISTRATOR_PASSWORD=
+      - EGG_MONGOOSE_URL=
+      - EGG_DINGTALK_ROBOT_URL=
     ports:
       - 7001
-    volumes:
-      - oss_volume:/nouse
-      - ./opts-egg/config/config.prod.js:/usr/src/app/config/config.prod.js:ro
 ```
 
 **Aliyun Container Service**
@@ -85,56 +81,23 @@ services:
     image: implementsio/opts-egg:latest
     environment:
       - EGG_SERVER_ENV=prod  
+      - EGG_SERVER_ENV=prod
+      - EGG_MAIDOPS_ACCESS_TOKEN=
+      - EGG_WHITELIST=
+      - EGG_MAIDOPS_ACCESS_TOKEN=
+      - EGG_ADMINISTRATOR_USERNAEM=
+      - EGG_ADMINISTRATOR_PASSWORD=
+      - EGG_MONGOOSE_URL=
+      - EGG_DINGTALK_ROBOT_URL=      
     ports:
       - 7001
-    volumes:
-      - oss_volume:/nouse
-      - /mnt/acs_mnt/ossfs/{YOUR_OSS_VOLUME_NAME}/opts-egg/config/config.prod.js:/usr/src/app/config/config.prod.js:ro
+    # volumes:
+    #  - oss_volume:/nouse
+    #  - ./opts-egg/config/config.prod.js:/usr/src/app/config/config.prod.js:ro
     labels:
       aliyun.scale: '1'
       aliyun.rolling_updates: 'true'
       aliyun.routing.port_7001: http://{YOUR_DOMAIN_NAME}
-```
-
-### Custom Config
-
-**opts-egg**
-
-```js
-// {app_root}/app/config/config.prod.js
-
-// replace with yours
-exports.mongoose = {
-  url: 'mongodb://localhost/devops',
-  options: {},
-};
-
-exports.jwt = {
-  secret: 'opts',
-  enable: true,
-  match: '/api',
-};
-
-// replace with yours
-exports.administrator = {
-  username: 'suyi',
-  password: '123456',
-  userrole: 'admin',
-};
-
-exports.notifications = {
-  dingtalk: {
-    type: 'dingtalk',
-    callbackUrl: '',
-  },
-};
-```
-
-**opts-react**
-
-```js
-// replace with yours
-exports.api_server = 'http://localhost:7001'
 ```
 
 ## Development
