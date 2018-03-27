@@ -8,12 +8,14 @@ Maidops is a  DevOps Middleware based on Docker / Kuberntes .
 
 ## Features
 
-- manage image
-- receive webhook
+- image management
+- webhook
 	- Docker Hub
 	- Harbor
 	- Aliyun Container Registry
-- deploy to docker / kubernets
+- notification
+	- dingtalk
+- docker / kubernets deployment
 	- aliyun container service
 	- kubernetes
 	- rancher (WIP)
@@ -102,8 +104,8 @@ services:
 
 ## Development
 
-- https://github.com/thonatos/opts-react
-- https://github.com/thonatos/opts-egg
+- [opts-egg]
+- [opts-react]
 
 ***You can find the screenshots [here](./opts-react.md).***
 
@@ -116,3 +118,6 @@ Please open an issue [here](https://github.com/thonatos/maidops/issues).
 ### License
 
 Maidops is [MIT licensed](./LICENSE).
+
+[opts-react]: https://github.com/thonatos/opts-react
+[opts-egg]: https://github.com/thonatos/opts-egg
